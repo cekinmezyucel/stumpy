@@ -2,9 +2,9 @@ package com.stumpy.controller;
 
 import java.net.URI;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +22,11 @@ public class RedirectController {
 
 	@GET
 	@RequestMapping(value = "/{shortUrl}")
-	public Response redirect(@PathVariable String shortUrl) {
+	public void redirect(@PathVariable String shortUrl, @Context HttpServletResponse httpServletResponse) {
 		String longUrl = redirectService.getLongUrl(shortUrl);
-		URI uri = UriBuilder.fromUri("https://translate.google.com/").build();
-		return Response.status(Status.MOVED_PERMANENTLY).header("Location", "https://translate.google.com/").build();
+		URI uri = UriBuilder.fromUri("https://translate.google.com").build();
+		httpServletResponse.setHeader("Location", longUrl);
+		httpServletResponse.setStatus(301);
 	}
 
 }
