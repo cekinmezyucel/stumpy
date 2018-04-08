@@ -17,7 +17,7 @@ public class ShortenerService {
 
 	public String getShortUrl(String longUrl) {
 		validateLongUrl(longUrl);
-		redisTemplate.opsForHash().putIfAbsent(FULL_URL_ID_INDEX_KEY, longUrl, generateNewId());
+		Boolean putIfAbsent = redisTemplate.opsForHash().putIfAbsent(FULL_URL_ID_INDEX_KEY, longUrl, generateNewId());
 		Long id = (Long) redisTemplate.opsForHash().get(FULL_URL_ID_INDEX_KEY, longUrl);
 		redisTemplate.opsForHash().putIfAbsent(ID_FULL_URL_INDEX_KEY, id, longUrl);
 		return UrlGeneratorUtil.encode(id);
@@ -28,7 +28,7 @@ public class ShortenerService {
 	}
 
 	private Long generateNewId() {
-		return 1001L;
+		return 1002L;
 	}
 
 }
