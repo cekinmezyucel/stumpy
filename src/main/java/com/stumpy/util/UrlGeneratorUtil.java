@@ -9,7 +9,7 @@ public class UrlGeneratorUtil {
   }
 
   public static String encode(Long id) {
-    return Base64.getUrlEncoder().encodeToString(String.valueOf(id).getBytes());
+    return Base64.getUrlEncoder().withoutPadding().encodeToString(String.valueOf(id).getBytes());
   }
 
   public static Long decode(String shortUrl) {
