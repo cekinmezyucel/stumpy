@@ -1,7 +1,5 @@
 package com.stumpy.controller;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +28,7 @@ public class RedirectController {
    * @param shortUrl.
    * @param httpServletResponse.
    */
-  @RequestMapping(value = "/{shortUrl}", method = GET, consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
+  @RequestMapping(value = "/{shortUrl}", method = GET)
   public void redirect(@PathVariable String shortUrl, @Context HttpServletResponse httpServletResponse) {
     String longUrl = redirectService.getLongUrl(shortUrl);
     httpServletResponse.setHeader("Location", longUrl);

@@ -7,20 +7,17 @@ public class UrlModel implements Serializable {
   private static final long serialVersionUID = 8005933239246279968L;
 
   private Long id;
-  private String shortUrl;
   private String longUrl;
 
   /**
    * Constructor using all fields.
    * 
    * @param id.
-   * @param shortUrl.
    * @param longUrl.
    */
-  public UrlModel(Long id, String shortUrl, String longUrl) {
+  public UrlModel(Long id, String longUrl) {
     super();
     this.id = id;
-    this.shortUrl = shortUrl;
     this.longUrl = longUrl;
   }
 
@@ -34,14 +31,6 @@ public class UrlModel implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public String getShortUrl() {
-    return shortUrl;
-  }
-
-  public void setShortUrl(String shortUrl) {
-    this.shortUrl = shortUrl;
   }
 
   public String getLongUrl() {

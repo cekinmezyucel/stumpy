@@ -2,20 +2,14 @@ package com.stumpy.model;
 
 import java.io.Serializable;
 
-public class RedirectModel implements Serializable {
+public class LongUrlModel implements Serializable {
 
   private static final long serialVersionUID = 6012607193836897563L;
 
   private String longUrl;
 
-  /**
-   * Constructor using all fields.
-   * 
-   * @param longUrl.
-   */
-  public RedirectModel(String longUrl) {
+  public LongUrlModel() {
     super();
-    this.longUrl = longUrl;
   }
 
   public String getLongUrl() {
