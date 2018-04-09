@@ -29,6 +29,9 @@ public class ShortenerService {
    * @return {@link String}.
    */
   public String getShortUrl(String longUrl) {
+
+    validateLongUrl(longUrl);
+
     Optional<Entry<Object, Object>> findAny = urlModelRepository.findAllUrlModels().entrySet().stream()
         .filter(m -> ((UrlModel) m.getValue()).getLongUrl().equals(longUrl)).findAny();
 

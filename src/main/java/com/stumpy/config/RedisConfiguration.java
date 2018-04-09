@@ -13,8 +13,7 @@ public class RedisConfiguration {
 
   @Bean
   JedisConnectionFactory getJedisConnectionFactory() {
-    JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(new RedisStandaloneConfiguration());
-    return jedisConnectionFactory;
+    return new JedisConnectionFactory(new RedisStandaloneConfiguration());
   }
 
   /**
