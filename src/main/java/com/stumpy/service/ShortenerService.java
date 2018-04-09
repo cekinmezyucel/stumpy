@@ -12,23 +12,30 @@ import com.stumpy.util.UrlGeneratorUtil;
 @Service
 public class ShortenerService {
 
-	@Autowired
-	RedisTemplate<String, Object> redisTemplate;
+  @Autowired
+  RedisTemplate<String, Object> redisTemplate;
 
-	public String getShortUrl(String longUrl) {
-		validateLongUrl(longUrl);
-		Boolean putIfAbsent = redisTemplate.opsForHash().putIfAbsent(FULL_URL_ID_INDEX_KEY, longUrl, generateNewId());
-		Long id = (Long) redisTemplate.opsForHash().get(FULL_URL_ID_INDEX_KEY, longUrl);
-		redisTemplate.opsForHash().putIfAbsent(ID_FULL_URL_INDEX_KEY, id, longUrl);
-		return UrlGeneratorUtil.encode(id);
-	}
+  /**
+   * Generate shortUrl and put in Redis. If the longUrl exist in the databse, existing id will return
+   * with shortUrl encoding.
+   * 
+   * @param longUrl.
+   * @return {@link String}.
+   */
+  public String getShortUrl(String longUrl) {
+    validateLongUrl(longUrl);
+    Boolean putIfAbsent = redisTemplate.opsForHash().putIfAbsent(FULL_URL_ID_INDEX_KEY, longUrl, generateNewId());
+    Long id = (Long) redisTemplate.opsForHash().get(FULL_URL_ID_INDEX_KEY, longUrl);
+    redisTemplate.opsForHash().putIfAbsent(ID_FULL_URL_INDEX_KEY, id, longUrl);
+    return UrlGeneratorUtil.encode(id);
+  }
 
-	private void validateLongUrl(String longUrl) {
-		// TODO : add some validations.
-	}
+  private void validateLongUrl(String longUrl) {
+    // TODO : add some validations.
+  }
 
-	private Long generateNewId() {
-		return 1002L;
-	}
+  private Long generateNewId() {
+    return 1002L;
+  }
 
 }

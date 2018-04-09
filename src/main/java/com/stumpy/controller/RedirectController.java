@@ -1,11 +1,11 @@
 package com.stumpy.controller;
 
-import java.net.URI;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,17 +17,24 @@ import com.stumpy.service.RedirectService;
 @RestController
 public class RedirectController {
 
-	@Autowired
-	RedirectService redirectService;
+  @Autowired
+  RedirectService redirectService;
 
-	@GET
-	@RequestMapping(value = "/{shortUrl}")
-	public void redirect(@PathVariable String shortUrl, @Context HttpServletResponse httpServletResponse) {
-		String longUrl = redirectService.getLongUrl(shortUrl);
-		URI uri = UriBuilder.fromUri("https://translate.google.com").build();
-		httpServletResponse.setHeader("Location", longUrl);
-		httpServletResponse.setStatus(301);
-		//TODO: remove unused
-	}
+  /**
+   * Redirect Service.
+   * 
+   * <p>
+   * Main redirect method. Retrieve shortUrl and redirect with 301.
+   * </p>
+   * 
+   * @param shortUrl.
+   * @param httpServletResponse.
+   */
+  @RequestMapping(value = "/{shortUrl}", method = GET, consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
+  public void redirect(@PathVariable String shortUrl, @Context HttpServletResponse httpServletResponse) {
+    String longUrl = redirectService.getLongUrl(shortUrl);
+    httpServletResponse.setHeader("Location", longUrl);
+    httpServletResponse.setStatus(301);
+  }
 
 }

@@ -12,16 +12,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedirectService {
 
-	@Autowired
-	RedisTemplate<String, Object> redisTemplate;
+  @Autowired
+  RedisTemplate<String, Object> redisTemplate;
 
-	public String getLongUrl(String shortUrl) {
-		Object object = redisTemplate.opsForHash().get(ID_FULL_URL_INDEX_KEY, decode(shortUrl));
-		if (Objects.isNull(object)) {
-			throw new RuntimeException();
-		} else {
-			return (String) object;
-		}
-	}
+  /**
+   * Retrieve longUrl for given shortUrl from Redis.
+   * 
+   * @param shortUrl.
+   * @return {@link String}.
+   */
+  public String getLongUrl(String shortUrl) {
+    Object object = redisTemplate.opsForHash().get(ID_FULL_URL_INDEX_KEY, decode(shortUrl));
+    if (Objects.isNull(object)) {
+      throw new RuntimeException();
+    } else {
+      return (String) object;
+    }
+  }
 
 }

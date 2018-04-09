@@ -11,13 +11,20 @@ import com.stumpy.service.ShortenerService;
 @RestController
 public class ShortenerController {
 
-	@Autowired
-	ShortenerService shortenerService;
 
-	@RequestMapping("/shortener")
-	public UrlModel getUrlModel(@RequestParam(value = "url") String url) {
-		String shortUrl = shortenerService.getShortUrl(url);
-		return new UrlModel(1L, shortUrl, url);
-	}
+  @Autowired
+  ShortenerService shortenerService;
+
+  /**
+   * Url shortener method.
+   * 
+   * @param longUrl.
+   * @return {@link UrlModel}.
+   */
+  @RequestMapping("/shortener")
+  public UrlModel getUrlModel(@RequestParam(value = "longUrl") String longUrl) {
+    String shortUrl = shortenerService.getShortUrl(longUrl);
+    return new UrlModel(1L, shortUrl, longUrl);
+  }
 
 }

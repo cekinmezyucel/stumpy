@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class StumpyApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StumpyApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(StumpyApplication.class, args);
+  }
 }
