@@ -1,5 +1,7 @@
 package com.stumpy.service;
 
+import static com.stumpy.util.UrlGeneratorUtil.encode;
+
 import java.util.Map.Entry;
 import java.util.Optional;
 
@@ -8,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.stumpy.model.UrlModel;
 import com.stumpy.repository.UrlModelRepository;
-import com.stumpy.util.UrlGeneratorUtil;
 
 @Service
 public class ShortenerService {
@@ -30,7 +31,7 @@ public class ShortenerService {
     Optional<Entry<Object, Object>> findAny = redisRepository.findAllUrlModels().entrySet().stream()
         .filter(m -> ((UrlModel) m.getValue()).getLongUrl().equals(longUrl)).findAny();
 
-    return findAny.isPresent() ? UrlGeneratorUtil.encode((Long) findAny.get().getKey()) : addNewLongUrl(longUrl);
+    return findAny.isPresent() ? encode((Long) findAny.get().getKey()) : addNewLongUrl(longUrl);
   }
 
   private void validateLongUrl(String longUrl) {
@@ -40,7 +41,7 @@ public class ShortenerService {
   private String addNewLongUrl(String longUrl) {
     Long id = generateNewId();
     redisRepository.add(new UrlModel(id, longUrl));
-    return UrlGeneratorUtil.encode(id);
+    return encode(id);
   }
 
   private Long generateNewId() {
