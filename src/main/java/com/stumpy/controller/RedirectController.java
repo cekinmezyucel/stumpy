@@ -27,6 +27,7 @@ public class RedirectController {
 		URI uri = UriBuilder.fromUri("https://translate.google.com").build();
 		httpServletResponse.setHeader("Location", longUrl);
 		httpServletResponse.setStatus(301);
+		//TODO: remove unused
 	}
 
 }
