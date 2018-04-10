@@ -1,5 +1,6 @@
 package com.stumpy.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -11,9 +12,15 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisConfiguration {
 
+  @Value("${redis.hostName}")
+  private String hostName;
+
+  @Value("${redis.port}")
+  private int port;
+
   @Bean
   JedisConnectionFactory getJedisConnectionFactory() {
-    return new JedisConnectionFactory(new RedisStandaloneConfiguration());
+    return new JedisConnectionFactory(new RedisStandaloneConfiguration(hostName, port));
   }
 
   /**
