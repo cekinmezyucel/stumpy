@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="5 seconds">
+    <property name="home.dir" value="/home/yucel/dev/applications"/>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+       <layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+	<appender name="stumpy-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                <timestampFormat>yyyy-MM-dd'T'HH:mm:ss.SSSZ</timestampFormat>
+                <timestampFormatTimezoneId>Europe/Istanbul</timestampFormatTimezoneId>
+                <appendLineSeparator>true</appendLineSeparator>
+            </layout>
+        </encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${home.dir}/stumpy/log/stumpy-service-application.%d{yyyy-MM-dd}.log</fileNamePattern>
+				<maxHistory>30</maxHistory>
+      			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+	
+	<logger name="com.stumpy" level="debug">
+		<appender-ref ref="console" />
+		<appender-ref ref="stumpy-file" />
+	</logger>
+	
+</configuration>

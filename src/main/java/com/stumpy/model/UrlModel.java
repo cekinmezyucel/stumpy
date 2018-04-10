@@ -1,6 +1,7 @@
 package com.stumpy.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class UrlModel implements Serializable {
 
@@ -40,5 +41,34 @@ public class UrlModel implements Serializable {
   public void setLongUrl(String longUrl) {
     this.longUrl = longUrl;
   }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(this.id);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    UrlModel other = (UrlModel) obj;
+    if (id == null) {
+      if (other.id != null) {
+        return false;
+      }
+    } else if (!id.equals(other.id)) {
+      return false;
+    }
+    return true;
+  }
+
+  // TODO: add to string method.
 
 }
