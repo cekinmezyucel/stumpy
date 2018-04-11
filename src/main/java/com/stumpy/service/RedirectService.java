@@ -33,6 +33,7 @@ public class RedirectService {
       LOG.info("Long url found:" + urlModel.toString());
       return urlModel.getLongUrl();
     } else {
+      // TODO : fix it
       throw new RuntimeException();
     }
   }

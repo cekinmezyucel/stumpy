@@ -27,6 +27,7 @@
 		<checkstyle>7.7</checkstyle>
 		<logback.json.core>0.1.5</logback.json.core>
 		<logback.json.classic>0.1.5</logback.json.classic>
+		<swagger.annotations>1.5.10</swagger.annotations>
 	</properties>
 
 	<dependencies>
@@ -66,6 +67,12 @@
 			<groupId>ch.qos.logback.contrib</groupId>
 			<artifactId>logback-json-core</artifactId>
 			<version>${logback.json.core}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>${swagger.annotations}</version>
 		</dependency>
 	</dependencies>
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="5 seconds">
 
-	<property name="app.name" value="stumpy"/>
-   	<property name="home.dir" value="/home/yucelcekinmez"/>
+	<springProperty scope="context" name="app.name" source="app.name" defaultValue="stumpy-default"/>
+	<springProperty scope="context" name="home.dir" source="home.dir" defaultValue="/home/yucelcekinmez"/>
 
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
        <layout class="ch.qos.logback.classic.PatternLayout">
