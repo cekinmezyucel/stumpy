@@ -25,6 +25,8 @@
 		<java.version>1.8</java.version>
 		<maven.checkstyle.plugin>2.17</maven.checkstyle.plugin>
 		<checkstyle>7.7</checkstyle>
+		<logback.json.core>0.1.5</logback.json.core>
+		<logback.json.classic>0.1.5</logback.json.classic>
 	</properties>
 
 	<dependencies>
@@ -57,16 +59,14 @@
 		<dependency>
 			<groupId>ch.qos.logback.contrib</groupId>
 			<artifactId>logback-json-classic</artifactId>
-			<version>0.1.5</version>
+			<version>${logback.json.classic}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>ch.qos.logback.contrib</groupId>
 			<artifactId>logback-json-core</artifactId>
-			<version>0.1.5</version>
+			<version>${logback.json.core}</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
