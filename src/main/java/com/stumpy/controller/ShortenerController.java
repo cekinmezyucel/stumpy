@@ -10,6 +10,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.validation.Valid;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stumpy.controller.base.BaseController;
 import com.stumpy.controller.request.ShortenerRequest;
 import com.stumpy.controller.response.ShortenerResponse;
-import com.stumpy.model.UrlModel;
 import com.stumpy.service.ShortenerService;
 
 @RestController
+@RequestMapping("/shortener")
+@Api(value = "shortener", produces = STANDART_PROD_CONS, protocols = "https", consumes = STANDART_PROD_CONS,
+    tags = {"shortener"})
 public class ShortenerController extends BaseController {
 
 
@@ -33,13 +36,13 @@ public class ShortenerController extends BaseController {
   /**
    * Url shortener method.
    * 
-   * @param longUrl.
-   * @return {@link UrlModel}.
+   * @param shortenerRequest.
+   * @return {@link ShortenerResponse}.
    */
-  @RequestMapping(path = "/shortener", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE},
+  @RequestMapping(path = "/get", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE},
       produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE}, method = POST)
   @ApiOperation(nickname = SHORTENER_GET_PATH, produces = STANDART_PROD_CONS, consumes = STANDART_PROD_CONS,
-      value = SHORTENER_GET_NAME, notes = SHORTENER_GET_DESCRIPTION, response = String.class)
+      value = SHORTENER_GET_NAME, notes = SHORTENER_GET_DESCRIPTION, response = ShortenerResponse.class)
   public ShortenerResponse getShortUrl(@Valid @RequestBody ShortenerRequest shortenerRequest) {
     return new ShortenerResponse(shortenerService.getShortUrl(shortenerRequest.getLongUrl()));
   }

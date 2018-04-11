@@ -1,0 +1,31 @@
+== Shortener Services
+=== How to call Shortener Get Service?
+You can check service details from <<_shortener_get, here>> .
+
+[[app-listing]]
+[source,xml]
+.Sample XML Request
+----
+include::examples/shortener/xml/shortener-get-request.xml[]
+----
+
+[[app-listing]]
+[source,xml]
+.Sample XML Response
+----
+include::examples/shortener/xml/shortener-get-response.xml[]
+----
+
+[[app-listing]]
+[source,json]
+.Sample Json Request
+----
+include::examples/shortener/json/shortener-get-request.json[]
+----
+
+[[app-listing]]
+[source,json]
+.Sample Json Response
+----
+include::examples/shortener/json/shortener-get-response.json[]
+----

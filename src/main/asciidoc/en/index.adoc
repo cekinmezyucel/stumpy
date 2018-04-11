@@ -1,0 +1,14 @@
+:icons: font
+:iconfont-cdn: https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css
+
+:app-dev: localhost:8080/
+:app-preproduction: https://stumpy.io
+:app-postman-link: https://www.getpostman.com/collections
+
+:support-email: cekinmezyucel@gmail.com
+
+include::overview.adoc[]
+include::brief.adoc[]
+include::shortenerService.adoc[]
+include::paths.adoc[]
+include::definitions.adoc[]

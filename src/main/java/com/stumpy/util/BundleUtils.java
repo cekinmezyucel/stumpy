@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 public class BundleUtils {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(BundleUtils.class);
+  private static final Logger LOG = LoggerFactory.getLogger(BundleUtils.class);
 
   private BundleUtils() {
     super();
@@ -49,7 +49,7 @@ public class BundleUtils {
     try {
       return formatter.format(params);
     } catch (Exception exception) {
-      LOGGER.error("Could not format " + messageKey, exception);
+      LOG.error("Could not format " + messageKey, exception);
     }
     return messageKey;
   }

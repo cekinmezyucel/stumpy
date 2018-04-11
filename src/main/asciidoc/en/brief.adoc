@@ -1,0 +1,31 @@
+== About This Document
+This document contains application definitions and describes how these services will be invoked.
+
+Since the document is updated in each version, the services in the test and real environment may differ.
+Follow the release notes.
+
+== Changes
+1.0.0 Service Definitions
+
+== About Application
+This application is running on REST services. 
+It consumes JSON and XML requests and produces JSON and XML requests.
+
+== Generating Clients
+Service documentation based on Swagger. You can use  following files *{app-preproduction}/test/swagger.json* for test environment,
+ *{app-production}/test/swagger.json* for production environment to generate client. There is a code generator located on *https://generator.swagger.io* which helps you to build client in any language.
+ 
+== Help and Support
+You can send your opinions or support request to *{support-email}* mail address.
+
+
+== Postman Usage
+You can access the postman application from https://www.getpostman.com . You can access collections prepared for you to access Stumpy Rest Services from the link below.
+Application {app-postman-link}.
+
+
+== Service Details
+From this point document contains service description and call details.
+
+
+:sectnums:
