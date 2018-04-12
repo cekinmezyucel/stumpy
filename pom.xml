@@ -28,6 +28,15 @@
 		<logback.json.core>0.1.5</logback.json.core>
 		<logback.json.classic>0.1.5</logback.json.classic>
 		<swagger.annotations>1.5.10</swagger.annotations>
+		<swagger-maven-plugin.version>3.1.6</swagger-maven-plugin.version>
+		<base.generated.docs.dir>${project.build.directory}/generated-docs</base.generated.docs.dir>
+		<asciidoctor.input.directory>${base.generated.docs.dir}/asciidoc</asciidoctor.input.directory>
+		<generated.asciidoc.directory>${base.generated.docs.dir}/asciidoc</generated.asciidoc.directory>
+		<asciidoctor.html.output.directory>${base.generated.docs.dir}/html</asciidoctor.html.output.directory>
+		<asciidoctor.pdf.output.directory>${base.generated.docs.dir}/pdf</asciidoctor.pdf.output.directory>
+		<swagger.input.directory>${project.build.directory}/swagger-ui</swagger.input.directory>
+		<asciidoctor-maven-plugin.version>1.5.3</asciidoctor-maven-plugin.version>
+		<swagger2markup.plugin.version>1.0.0</swagger2markup.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -74,45 +83,176 @@
 			<artifactId>swagger-annotations</artifactId>
 			<version>${swagger.annotations}</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${maven.checkstyle.plugin}</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.puppycrawl.tools</groupId>
-						<artifactId>checkstyle</artifactId>
-						<version>${checkstyle}</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<id>checkstyle</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-						<configuration>
-							<violationSeverity>error</violationSeverity>
-							<configLocation>${project.basedir}/codequality/checkstyle.xml</configLocation>
-							<consoleOutput>true</consoleOutput>
-							<failsOnError>true</failsOnError>
-							<failOnViolation>true</failOnViolation>
-							<suppressionsLocation>${project.basedir}/codequality/checkstyle.suppression.xml</suppressionsLocation>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>${maven.checkstyle.plugin}</version>
+					<dependencies>
+						<dependency>
+							<groupId>com.puppycrawl.tools</groupId>
+							<artifactId>checkstyle</artifactId>
+							<version>${checkstyle}</version>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>checkstyle</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+							<configuration>
+								<violationSeverity>error</violationSeverity>
+								<configLocation>${project.basedir}/codequality/checkstyle.xml</configLocation>
+								<consoleOutput>true</consoleOutput>
+								<failsOnError>true</failsOnError>
+								<failOnViolation>true</failOnViolation>
+								<suppressionsLocation>${project.basedir}/codequality/checkstyle.suppression.xml</suppressionsLocation>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>com.github.kongchen</groupId>
+					<artifactId>swagger-maven-plugin</artifactId>
+					<version>${swagger-maven-plugin.version}</version>
+					<configuration>
+						<apiSources>
+							<apiSource>
+								<springmvc>true</springmvc>
+								<locations>
+									<location>com.stumpy.controller.ShortenerController</location>
+								</locations>
+								<schemes>
+									<scheme>https</scheme>
+								</schemes>
+								<basePath>xxx</basePath>
+								<host>yyy</host>
+								<info>
+									<title>Stumpy Service</title>
+									<version>v1</version>
+								</info>
+								<outputFormats>json</outputFormats>
+								<swaggerDirectory>${project.build.directory}/swagger-ui</swaggerDirectory>
+							</apiSource>
+						</apiSources>
+					</configuration>
+					<executions>
+						<execution>
+							<id>docbuild</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>io.github.swagger2markup</groupId>
+					<artifactId>swagger2markup-maven-plugin</artifactId>
+					<version>${swagger2markup.plugin.version}</version>
+					<executions>
+						<execution>
+							<id>enbuild</id>
+							<configuration>
+								<config>
+									<swagger2markup.outputLanguage>EN</swagger2markup.outputLanguage>
+									<swagger2markup.separatedDefinitionsEnabled>false</swagger2markup.separatedDefinitionsEnabled>
+								</config>
+								<outputDir>${generated.asciidoc.directory}/en</outputDir>
+								<swaggerInput>${swagger.input.directory}/swagger.json</swaggerInput>
+							</configuration>
+							<phase>compile</phase>
+							<goals>
+								<goal>convertSwagger2markup</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>compile</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<configuration>
+								<tasks>
+									<echo message="copy adocs" />
+									<copydir forceoverwrite="true"
+										src="src/main/asciidoc/en"
+										dest="${generated.asciidoc.directory}/en" />
+									<copydir forceoverwrite="true"
+										src="src/main/asciidoc/examples/"
+										dest="${generated.asciidoc.directory}/en/examples" />
+									<copydir forceoverwrite="true"
+										src="src/main/asciidoc/image/"
+										dest="${generated.asciidoc.directory}/en/image" />
+								</tasks>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- Asciidoctor -->
+				<plugin>
+					<groupId>org.asciidoctor</groupId>
+					<artifactId>asciidoctor-maven-plugin</artifactId>
+					<version>${asciidoctor-maven-plugin.version}</version>
+					<!-- Include Asciidoctor PDF for pdf generation -->
+					<dependencies>
+						<dependency>
+							<groupId>org.asciidoctor</groupId>
+							<artifactId>asciidoctorj-pdf</artifactId>
+							<version>1.5.0-alpha.11</version>
+						</dependency>
+					</dependencies>
+					<!-- Configure generic document generation settings -->
+					<configuration>
+						<sourceDocumentName>index.adoc</sourceDocumentName>
+						<backend>html5</backend>
+						<attributes>
+							<doctype>book</doctype>
+							<toc>left</toc>
+							<toclevels>2</toclevels>
+							<data-uri>true</data-uri>
+							<toclevels>3</toclevels>
+							<source-highlighter>coderay</source-highlighter>
+						</attributes>
+					</configuration>
+					<!-- Since each execution can only handle one backend, run separate 
+						executions for each desired output type -->
+					<executions>
+						<execution>
+							<id>output-html-en</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>process-asciidoc</goal>
+							</goals>
+							<configuration>
+								<sourceDirectory>${asciidoctor.input.directory}/en</sourceDirectory>
+								<imagesDir>${asciidoctor.input.directory}/en</imagesDir>
+								<outputDirectory>${asciidoctor.html.output.directory}/en</outputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 
