@@ -17,6 +17,9 @@ Stumpy developed with Java 8, a number of technologies and open source projects:
 * [Swagger2Markup]
 * [Apache Maven Checkstyle Plugin]
 
+## For Developers
+To avoid build failulers you must import these files (eclipse-code-formatter.xml, eclipse.importorder) to your IDE. The files are under the codequality folder.
+
 [SpringBoot]: <https://projects.spring.io/spring-boot/>
 [Redis]: <https://redis.io/>
 [Docker]: <https://www.docker.com/>
