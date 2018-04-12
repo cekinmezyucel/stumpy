@@ -5,7 +5,7 @@
 :app-preproduction: https://stumpy.io
 :app-postman-link: https://www.getpostman.com/collections
 
-:support-email: cekinmezyucel@gmail.com
+:support-email: support@stumpy.io
 
 include::overview.adoc[]
 include::brief.adoc[]
