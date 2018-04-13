@@ -162,6 +162,27 @@
 				<groupId>io.github.swagger2markup</groupId>
 				<artifactId>swagger2markup-maven-plugin</artifactId>
 				<version>${swagger2markup.plugin.version}</version>
+				<!-- Replace the dependencies that aren't in Maven Central -->
+				<dependencies>
+					<dependency>
+						<groupId>ca.szc.thirdparty.nl.jworks.markdown_to_asciidoc</groupId>
+						<artifactId>markdown_to_asciidoc</artifactId>
+						<!-- Keep in sync with markup-document-builder's dependency -->
+						<version>1.0</version>
+					</dependency>
+					<dependency>
+						<groupId>io.github.swagger2markup</groupId>
+						<artifactId>swagger2markup</artifactId>
+						<!-- Keep in sync with swagger2markup-maven-plugin's dependency -->
+						<version>1.0.0</version>
+						<exclusions>
+							<exclusion>
+								<groupId>nl.jworks.markdown_to_asciidoc</groupId>
+								<artifactId>markdown_to_asciidoc</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
 						<id>enbuild</id>
@@ -198,9 +219,6 @@
 								<copydir forceoverwrite="true"
 									src="src/main/asciidoc/examples/"
 									dest="${generated.asciidoc.directory}/en/examples" />
-								<copydir forceoverwrite="true"
-									src="src/main/asciidoc/image/"
-									dest="${generated.asciidoc.directory}/en/image" />
 							</tasks>
 						</configuration>
 					</execution>
