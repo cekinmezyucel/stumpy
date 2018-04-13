@@ -20,6 +20,9 @@ Stumpy developed with Java 8, a number of technologies and open source projects:
 ## For Developers
 To avoid build failures you must import these files (eclipse-code-formatter.xml, eclipse.importorder) to your IDE. The files are under the codequality folder.
 
+fixit
+docker volume create --name=stumpy-service-log-repo
+
 [SpringBoot]: <https://projects.spring.io/spring-boot/>
 [Redis]: <https://redis.io/>
 [Docker]: <https://www.docker.com/>

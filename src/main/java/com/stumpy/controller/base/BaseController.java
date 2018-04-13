@@ -43,4 +43,14 @@ public class BaseController {
         HttpStatus.valueOf(exceptionRestResult.getHttpStatus()));
   }
 
+  // TODO: handle multiple exceptions
+  // @ExceptionHandler({Exception.class})
+  // public ResponseEntity<Object> handleAll(Exception exception, WebRequest request) {
+  //
+  // ExceptionRestResult rr = new ExceptionRestResult("AAA", 500, "Hata!");
+  // // return handle()
+  // return new ResponseEntity<>(rr, new HttpHeaders(), HttpStatus.valueOf(rr.getHttpStatus()));
+  //
+  // }
+
 }
