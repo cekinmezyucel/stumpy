@@ -24,6 +24,10 @@ fixit
 docker volume create --name=stumpy-service-log-repo
 
 fixit
+docker compose path  ${project.basedir}/docker/
+docker-compose up --build
+
+fixit
 document path
 file:///home/yucel/dev/git/stumpy/target/generated-docs/html/en/index.html
 
