@@ -206,6 +206,7 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>compile</id>
 						<phase>compile</phase>
 						<goals>
 							<goal>run</goal>
@@ -219,6 +220,21 @@
 								<copydir forceoverwrite="true"
 									src="src/main/asciidoc/examples/"
 									dest="${generated.asciidoc.directory}/en/examples" />
+							</tasks>
+						</configuration>
+					</execution>
+					<execution>
+						<id>install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="copy jar to docker folder" />
+								<copy
+									file="${project.build.directory}/${project.artifactId}-${project.version}.jar"
+									tofile="${project.basedir}/docker/stumpy-service.jar" />
 							</tasks>
 						</configuration>
 					</execution>

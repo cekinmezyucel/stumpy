@@ -7,27 +7,22 @@ services:
       dockerfile: Dockerfile
     image: stumpy-service:latest
     entrypoint: java -jar -Dspring.profiles.active=prod /opt/stumpy-service/lib/stumpy-service.jar
-    expose:
-    - 8080
     ports:
-    - 8080:8080
+    - 8081:8081
     volumes:
     - stumpy-service-log-repo:/var/log/
-    networks:
-    - stumpy-network
+    network_mode: "host"
     depends_on:
     - redis
     logging:
       driver: json-file
   redis:
     image: redis:alpine
+    container_name: redis
+    expose:
+    - 6379
     ports:
     - 6379:6379
-    networks:
-    - stumpy-network
-networks:
-  stumpy-network:
-    driver: bridge
 volumes:
   stumpy-service-log-repo:
     external: true

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="5 seconds">
 
-	<springProperty scope="context" name="app.name" source="app.name" defaultValue="stumpy-default"/>
-	<springProperty scope="context" name="home.dir" source="home.dir" defaultValue="/home/yucelcekinmez"/>
+	<springProperty scope="context" name="app.name" source="app.name" defaultValue="stumpy"/>
+	<springProperty scope="context" name="home.dir" source="home.dir" defaultValue="/home/yucel"/>
 
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
        <layout class="ch.qos.logback.classic.PatternLayout">
@@ -27,6 +27,10 @@
 	</appender>
 	
 	<logger name="com.stumpy" level="debug">
+		<appender-ref ref="console" />
+		<appender-ref ref="stumpy-file" />
+	</logger>
+	<logger name="org.springframework.web" level="debug">
 		<appender-ref ref="console" />
 		<appender-ref ref="stumpy-file" />
 	</logger>
