@@ -23,6 +23,10 @@ To avoid build failures you must import these files (eclipse-code-formatter.xml,
 fixit
 docker volume create --name=stumpy-service-log-repo
 
+fixit
+document path
+file:///home/yucel/dev/git/stumpy/target/generated-docs/html/en/index.html
+
 [SpringBoot]: <https://projects.spring.io/spring-boot/>
 [Redis]: <https://redis.io/>
 [Docker]: <https://www.docker.com/>
