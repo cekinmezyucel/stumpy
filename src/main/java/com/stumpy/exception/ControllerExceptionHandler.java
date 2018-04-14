@@ -18,27 +18,39 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.context.request.WebRequest;
 
 import com.stumpy.exception.base.BaseException;
 import com.stumpy.exception.model.ExceptionRestResult;
 
 @ControllerAdvice
-public class ControllerExceptionHandler {
+public class ControllerExceptionHandler extends BaseExceptionHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
   /**
-   * Exception handler for Application.
+   * Exception handler for Exceptions.
    * 
    * @param exception.
-   * @param request.
+   * @return {@link ResponseEntity}.
+   */
+  @ResponseStatus(INTERNAL_SERVER_ERROR)
+  @ResponseBody
+  @ExceptionHandler({Exception.class})
+  public ExceptionRestResult handleException(Exception exception) {
+    // TODO : implement with baseExceptionHandler
+    return new ExceptionRestResult();
+  }
+
+  /**
+   * Exception handler for Business Exceptions.
+   * 
+   * @param exception.
    * @return {@link ResponseEntity}.
    */
   @ResponseStatus(INTERNAL_SERVER_ERROR)
   @ResponseBody
   @ExceptionHandler({BaseException.class})
-  public ExceptionRestResult handleAll(BaseException exception, WebRequest request) {
+  public ExceptionRestResult handleBaseException(BaseException exception) {
 
     LOG.error("An error occured", exception);
 
