@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stumpy.controller.base.BaseController;
 import com.stumpy.service.RedirectService;
 
 @RestController
-public class RedirectController extends BaseController {
+public class RedirectController {
 
   @Autowired
   RedirectService redirectService;

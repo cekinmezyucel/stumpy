@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stumpy.controller.base.BaseController;
 import com.stumpy.controller.request.ShortenerRequest;
 import com.stumpy.controller.response.ShortenerResponse;
 import com.stumpy.service.ShortenerService;
@@ -27,8 +26,7 @@ import com.stumpy.service.ShortenerService;
 @RequestMapping("/shortener")
 @Api(value = "shortener", produces = STANDART_PROD_CONS, protocols = "https", consumes = STANDART_PROD_CONS,
     tags = {"shortener"})
-public class ShortenerController extends BaseController {
-
+public class ShortenerController {
 
   @Autowired
   ShortenerService shortenerService;
