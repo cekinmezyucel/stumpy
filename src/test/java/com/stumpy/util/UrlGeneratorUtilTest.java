@@ -1,4 +1,4 @@
-package com.stumpy;
+package com.stumpy.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -8,8 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 import org.junit.Test;
-
-import com.stumpy.util.UrlGeneratorUtil;
 
 public class UrlGeneratorUtilTest {
 
