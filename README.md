@@ -41,7 +41,7 @@ For log volume please create stumpy-service-log-repo
 $ docker volume create --name=stumpy-service-log-repo
 ```
 
-Composing containers
+Composing containers. This command requires active internet connection for download [cekinmezyucel:alpine-java8](https://hub.docker.com/r/cekinmezyucel/alpine-java8/) and [redis:alpine](https://hub.docker.com/_/redis/) images.
 ```sh
 $ cd ${project.basedir}/docker/
 $ docker-compose up --build
