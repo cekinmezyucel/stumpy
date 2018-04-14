@@ -21,7 +21,10 @@ Stumpy developed with Java 8, a number of technologies and open source projects:
 To avoid build failures you must import these files (eclipse-code-formatter.xml, eclipse.importorder) to your IDE. The files are under the codequality folder.
 
 ### Installation
-Stumpy requires [JDK8]
+Stumpy requires [JDK8]. Please check your JAVA_HOME for success of build.
+```sh
+$ echo ${JAVA_HOME}
+```
 
 This is a maven project. Before the Docker initialization please run maven install command.
 ```sh
