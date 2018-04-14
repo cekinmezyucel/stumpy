@@ -8,9 +8,9 @@ public class SwaggerLocalizations {
 
   public static final String STANDART_PROD_CONS = "application/json, application/xml";
 
-  public static final String SHORTENER_GET_PATH = "/shortener/get";
-  public static final String SHORTENER_GET_NAME = "Shortener Get Service";
-  public static final String SHORTENER_GET_DESCRIPTION = "This service returns short URL";
+  public static final String SHORTENER_GENERATE_PATH = "/shortener/generate";
+  public static final String SHORTENER_GENERATE_NAME = "Shortener Get Service";
+  public static final String SHORTENER_GENERATE_DESCRIPTION = "This service returns short URL";
   public static final String SHORTENER_REQUEST = "Shortener Get Request";
   public static final String SHORTENER_RESPONSE = "Shortener Get Response";
 

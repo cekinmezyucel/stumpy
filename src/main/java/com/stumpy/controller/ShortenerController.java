@@ -1,14 +1,17 @@
 package com.stumpy.controller;
 
-import static com.stumpy.localization.SwaggerLocalizations.SHORTENER_GET_DESCRIPTION;
-import static com.stumpy.localization.SwaggerLocalizations.SHORTENER_GET_NAME;
-import static com.stumpy.localization.SwaggerLocalizations.SHORTENER_GET_PATH;
+import static com.stumpy.localization.SwaggerLocalizations.SHORTENER_GENERATE_DESCRIPTION;
+import static com.stumpy.localization.SwaggerLocalizations.SHORTENER_GENERATE_NAME;
+import static com.stumpy.localization.SwaggerLocalizations.SHORTENER_GENERATE_PATH;
 import static com.stumpy.localization.SwaggerLocalizations.STANDART_PROD_CONS;
+import static com.stumpy.util.UrlGeneratorUtil.buildFullPath;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.ws.rs.core.Context;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,12 +40,14 @@ public class ShortenerController {
    * @param shortenerRequest.
    * @return {@link ShortenerResponse}.
    */
-  @RequestMapping(path = "/get", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE},
+  @RequestMapping(path = "/generate", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE},
       produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE}, method = POST)
-  @ApiOperation(nickname = SHORTENER_GET_PATH, produces = STANDART_PROD_CONS, consumes = STANDART_PROD_CONS,
-      value = SHORTENER_GET_NAME, notes = SHORTENER_GET_DESCRIPTION, response = ShortenerResponse.class)
-  public ShortenerResponse getShortUrl(@Valid @RequestBody ShortenerRequest shortenerRequest) {
-    return new ShortenerResponse(shortenerService.getShortUrl(shortenerRequest.getLongUrl()));
+  @ApiOperation(nickname = SHORTENER_GENERATE_PATH, produces = STANDART_PROD_CONS, consumes = STANDART_PROD_CONS,
+      value = SHORTENER_GENERATE_NAME, notes = SHORTENER_GENERATE_DESCRIPTION, response = ShortenerResponse.class)
+  public ShortenerResponse generateShortUrl(@Valid @RequestBody ShortenerRequest shortenerRequest,
+      @Context HttpServletRequest httpServletRequest) {
+    return new ShortenerResponse(
+        buildFullPath(httpServletRequest, shortenerService.getShortUrl(shortenerRequest.getLongUrl())));
   }
 
 }
