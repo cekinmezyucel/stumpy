@@ -13,6 +13,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.stumpy.model.UrlStatisticCounterModel;
@@ -48,8 +49,13 @@ public class StatisticService {
   /**
    * Create statisticCounter if not exist, increment if it exist.
    * 
+   * <p>
+   * This method runs {@link Async}.
+   * </p>
+   * 
    * @param id.
    */
+  @Async
   public void executeStatisticOperations(Long id) {
     incrementStatisticCount(id, HIT_COUNT);
   }
