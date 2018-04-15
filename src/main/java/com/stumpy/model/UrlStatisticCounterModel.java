@@ -3,13 +3,15 @@ package com.stumpy.model;
 import java.io.Serializable;
 import java.util.Map;
 
+import com.stumpy.model.type.StatisticType;
+
 
 public class UrlStatisticCounterModel implements Serializable {
 
   private static final long serialVersionUID = -9080598277655966099L;
 
   private Long id;
-  private Map<String, Long> statisticCounter;
+  private Map<StatisticType, Long> statisticCounter;
 
   public UrlStatisticCounterModel() {
     super();
@@ -21,7 +23,7 @@ public class UrlStatisticCounterModel implements Serializable {
    * @param id.
    * @param statisticCounter.
    */
-  public UrlStatisticCounterModel(Long id, Map<String, Long> statisticCounter) {
+  public UrlStatisticCounterModel(Long id, Map<StatisticType, Long> statisticCounter) {
     super();
     this.id = id;
     this.statisticCounter = statisticCounter;
@@ -35,12 +37,14 @@ public class UrlStatisticCounterModel implements Serializable {
     this.id = id;
   }
 
-  public Map<String, Long> getStatisticCounter() {
+  public Map<StatisticType, Long> getStatisticCounter() {
     return statisticCounter;
   }
 
-  public void setStatisticCounter(Map<String, Long> statisticCounter) {
+  public void setStatisticCounter(Map<StatisticType, Long> statisticCounter) {
     this.statisticCounter = statisticCounter;
   }
+
+
 
 }
