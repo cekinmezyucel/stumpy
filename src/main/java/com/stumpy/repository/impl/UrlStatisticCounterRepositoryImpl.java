@@ -9,10 +9,12 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.stumpy.model.UrlStatisticCounterModel;
 import com.stumpy.repository.UrlStatisticCounterRepository;
 
+@Repository
 public class UrlStatisticCounterRepositoryImpl implements UrlStatisticCounterRepository {
 
   private RedisTemplate<String, Object> redisTemplate;

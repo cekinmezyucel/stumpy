@@ -18,7 +18,10 @@ public class RedirectService {
   private static final Logger LOG = LoggerFactory.getLogger(RedirectService.class);
 
   @Autowired
-  UrlModelRepository redisRepository;
+  private UrlModelRepository redisRepository;
+
+  @Autowired
+  private StatisticService statisticService;
 
   /**
    * Retrieve longUrl for given shortUrl from Redis.
@@ -27,10 +30,12 @@ public class RedirectService {
    * @return {@link String}.
    */
   public String getLongUrl(String shortUrl) {
-    UrlModel urlModel = redisRepository.findEntity(decode(shortUrl));
+    Long id = decode(shortUrl);
+    UrlModel urlModel = redisRepository.findEntity(id);
 
     if (nonNull(urlModel)) {
       LOG.info("Long url found:" + urlModel.toString());
+      statisticService.executeStatisticOperations(id);
       return urlModel.getLongUrl();
     } else {
       throw new StumpyException("STUMPY003");

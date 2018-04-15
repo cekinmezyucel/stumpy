@@ -24,9 +24,10 @@ public class StatisticController {
   private StatisticService statisticService;
 
   @ResponseStatus(OK)
-  @RequestMapping(value = "/count/{shortUrl}", method = GET)
-  public Long getHitCount(@PathVariable String shortUrl) {
-    return statisticService.getHitCount(shortUrl);
+  @RequestMapping(value = "/count/{statisticTypeName}/{shortUrl}", method = GET)
+  public Long getHitCount(@PathVariable("statisticTypeName") String statisticTypeName,
+      @PathVariable("shortUrl") String shortUrl) {
+    return statisticService.getStatisticCount(shortUrl, statisticTypeName);
   }
 
 }

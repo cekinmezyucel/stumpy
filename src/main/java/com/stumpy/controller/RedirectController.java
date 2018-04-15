@@ -1,6 +1,6 @@
 package com.stumpy.controller;
 
-import static org.springframework.http.HttpStatus.PERMANENT_REDIRECT;
+import static org.springframework.http.HttpStatus.TEMPORARY_REDIRECT;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,13 +24,13 @@ public class RedirectController {
    * Redirect Service.
    * 
    * <p>
-   * Main redirect method. Retrieve shortUrl and redirect with PERMANENT_REDIRECT(301).
+   * Main redirect method. Retrieve shortUrl and redirect with TEMPORARY_REDIRECT(307).
    * </p>
    * 
    * @param shortUrl.
    * @param httpServletResponse.
    */
-  @ResponseStatus(PERMANENT_REDIRECT)
+  @ResponseStatus(TEMPORARY_REDIRECT)
   @RequestMapping(value = "/{shortUrl}", method = GET)
   public void redirect(@PathVariable String shortUrl, @Context HttpServletResponse httpServletResponse) {
     String longUrl = redirectService.getLongUrl(shortUrl);
