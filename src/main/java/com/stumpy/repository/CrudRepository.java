@@ -2,9 +2,9 @@ package com.stumpy.repository;
 
 import java.util.Map;
 
-public interface CrudRepository<T, I> {
+public interface CrudRepository<K, T, I> {
 
-  Map<Object, Object> findAllEntities();
+  Map<K, T> findAllEntities();
 
   void add(T entity);
 

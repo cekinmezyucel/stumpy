@@ -40,10 +40,10 @@ public class ShortenerService {
 
     validateLongUrl(longUrl);
 
-    Optional<Entry<Object, Object>> findAny = urlModelRepository.findAllEntities().entrySet().stream()
-        .filter(m -> ((UrlModel) m.getValue()).getLongUrl().equals(longUrl)).findAny();
+    Optional<Entry<Long, UrlModel>> findAny = urlModelRepository.findAllEntities().entrySet().stream()
+        .filter(m -> m.getValue().getLongUrl().equals(longUrl)).findAny();
 
-    return findAny.isPresent() ? encode((Long) findAny.get().getKey()) : addNewLongUrl(longUrl);
+    return findAny.isPresent() ? encode(findAny.get().getKey()) : addNewLongUrl(longUrl);
   }
 
   private String addNewLongUrl(String longUrl) {

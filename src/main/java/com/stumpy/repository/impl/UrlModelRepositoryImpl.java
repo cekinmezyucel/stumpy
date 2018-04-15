@@ -35,7 +35,7 @@ public class UrlModelRepositoryImpl implements UrlModelRepository {
 
   @SuppressWarnings("unchecked")
   @Override
-  public Map<Object, Object> findAllEntities() {
+  public Map<Long, UrlModel> findAllEntities() {
     return hashOperations.entries(URL_MODEL_KEY);
   }
 
