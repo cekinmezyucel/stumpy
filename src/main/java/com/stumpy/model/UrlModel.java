@@ -69,6 +69,9 @@ public class UrlModel implements Serializable {
     return true;
   }
 
-  // TODO: add to string method.
+  @Override
+  public String toString() {
+    return "UrlModel [id=" + id + ", longUrl=" + longUrl + "]";
+  }
 
 }

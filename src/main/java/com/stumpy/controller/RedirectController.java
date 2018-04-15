@@ -18,7 +18,7 @@ import com.stumpy.service.RedirectService;
 public class RedirectController {
 
   @Autowired
-  RedirectService redirectService;
+  private RedirectService redirectService;
 
   /**
    * Redirect Service.

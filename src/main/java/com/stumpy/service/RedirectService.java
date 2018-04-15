@@ -27,7 +27,7 @@ public class RedirectService {
    * @return {@link String}.
    */
   public String getLongUrl(String shortUrl) {
-    UrlModel urlModel = redisRepository.findUrlModel(decode(shortUrl));
+    UrlModel urlModel = redisRepository.findEntity(decode(shortUrl));
 
     if (nonNull(urlModel)) {
       LOG.info("Long url found:" + urlModel.toString());

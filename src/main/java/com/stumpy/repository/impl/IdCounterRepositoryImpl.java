@@ -1,4 +1,4 @@
-package com.stumpy.repository;
+package com.stumpy.repository.impl;
 
 import static com.stumpy.config.RedisConfigurationConstants.ID_COUNTER_KEY;
 
@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Repository;
+
+import com.stumpy.repository.IdCounterRepository;
 
 @Repository
 public class IdCounterRepositoryImpl implements IdCounterRepository {

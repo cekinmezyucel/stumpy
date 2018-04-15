@@ -9,5 +9,10 @@ public class StatisticService {
 
   private static final Logger LOG = LoggerFactory.getLogger(StatisticService.class);
 
+  public Long getHitCount(String shortUrl) {
+    // TODO impl.
+    return 1L;
+  }
+
 
 }

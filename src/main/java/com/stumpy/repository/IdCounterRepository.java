@@ -1,7 +1,5 @@
 package com.stumpy.repository;
 
-public interface IdCounterRepository {
-
-  Long getAndIncrement();
+public interface IdCounterRepository extends CounterRepository {
 
 }

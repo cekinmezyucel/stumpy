@@ -1,4 +1,4 @@
-package com.stumpy.repository;
+package com.stumpy.repository.impl;
 
 import static com.stumpy.config.RedisConfigurationConstants.URL_MODEL_KEY;
 
@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.stumpy.model.UrlModel;
+import com.stumpy.repository.UrlModelRepository;
 
 
 @Repository
@@ -34,7 +35,7 @@ public class UrlModelRepositoryImpl implements UrlModelRepository {
 
   @SuppressWarnings("unchecked")
   @Override
-  public Map<Object, Object> findAllUrlModels() {
+  public Map<Object, Object> findAllEntities() {
     return hashOperations.entries(URL_MODEL_KEY);
   }
 
@@ -53,7 +54,7 @@ public class UrlModelRepositoryImpl implements UrlModelRepository {
 
   @SuppressWarnings("unchecked")
   @Override
-  public UrlModel findUrlModel(Long id) {
+  public UrlModel findEntity(Long id) {
     return (UrlModel) hashOperations.get(URL_MODEL_KEY, id);
   }
 
