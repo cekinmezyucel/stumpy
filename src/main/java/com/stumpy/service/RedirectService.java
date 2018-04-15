@@ -1,14 +1,14 @@
 package com.stumpy.service;
 
 import static com.stumpy.util.UrlGeneratorUtil.decode;
-
-import java.util.Objects;
+import static java.util.Objects.nonNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stumpy.exception.StumpyException;
 import com.stumpy.model.UrlModel;
 import com.stumpy.repository.UrlModelRepository;
 
@@ -29,12 +29,11 @@ public class RedirectService {
   public String getLongUrl(String shortUrl) {
     UrlModel urlModel = redisRepository.findUrlModel(decode(shortUrl));
 
-    if (Objects.nonNull(urlModel)) {
+    if (nonNull(urlModel)) {
       LOG.info("Long url found:" + urlModel.toString());
       return urlModel.getLongUrl();
     } else {
-      // TODO : fix it
-      throw new RuntimeException();
+      throw new StumpyException("STUMPY003");
     }
   }
 

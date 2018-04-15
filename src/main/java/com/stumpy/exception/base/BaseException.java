@@ -18,7 +18,7 @@ public abstract class BaseException extends RuntimeException {
    * @param code.
    * @param parameters.
    */
-  public BaseException(String code, Object[] parameters) {
+  public BaseException(String code, Object... parameters) {
     super();
     this.code = code;
     this.parameters = parameters;

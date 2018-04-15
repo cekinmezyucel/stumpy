@@ -5,14 +5,7 @@ import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.stumpy.exception.StumpyException;
-
 public class UrlGeneratorUtil {
-
-  private static final Logger LOG = LoggerFactory.getLogger(UrlGeneratorUtil.class);
 
   private UrlGeneratorUtil() {
     super();
@@ -35,13 +28,9 @@ public class UrlGeneratorUtil {
    * @return {@link String}.
    */
   public static String buildFullPath(HttpServletRequest request, String shortUrl) {
-    try {
-      return new StringBuilder().append(request.getScheme()).append("://").append(request.getServerName()).append(":")
-          .append(request.getServerPort()).append("/").append(shortUrl).toString();
-    } catch (Exception exception) {
-      LOG.error("Error occured when building full path for short url", exception);
-      throw new StumpyException("STUMPY001");
-    }
+    return new StringBuilder().append(request.getScheme()).append("://").append(request.getServerName()).append(":")
+        .append(request.getServerPort()).append("/").append(shortUrl).toString();
+
   }
 
 }
