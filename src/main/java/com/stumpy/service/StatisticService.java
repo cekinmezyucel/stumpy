@@ -28,7 +28,7 @@ public class StatisticService {
   private UrlStatisticCounterRepository urlStatisticCounterRepository;
 
   /**
-   * Retrieve shortUrl's hit count.
+   * Retrieve shortUrl's statisticType count.
    * 
    * @param shortUrl.
    * @return {@link Long}.
