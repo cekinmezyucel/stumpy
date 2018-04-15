@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="5 seconds">
 
-	<springProperty scope="context" name="app.name" source="app.name" defaultValue="stumpy"/>
-	<springProperty scope="context" name="home.dir" source="home.dir" defaultValue="/home/yucel"/>
+	<springProperty scope="context" name="log.dir" source="home.dir" defaultValue="/var"/>
 
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
        <layout class="ch.qos.logback.classic.PatternLayout">
@@ -20,7 +19,7 @@
             </layout>
         </encoder>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${home.dir}/${app.name}/log/stumpy-service-application.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>${home.dir}/log/stumpy-service-application.%d{yyyy-MM-dd}.log</fileNamePattern>
 				<maxHistory>30</maxHistory>
       			<totalSizeCap>1GB</totalSizeCap>
 		</rollingPolicy>
