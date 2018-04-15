@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.stumpy.exception.StumpyException;
+import com.stumpy.exception.model.StumpyException;
 import com.stumpy.model.UrlModel;
 import com.stumpy.repository.UrlModelRepository;
 

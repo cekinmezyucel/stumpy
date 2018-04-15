@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.stumpy.exception.base.BaseException;
+import com.stumpy.exception.base.BaseExceptionHandler;
 import com.stumpy.exception.model.ExceptionRestResult;
 
 @ControllerAdvice

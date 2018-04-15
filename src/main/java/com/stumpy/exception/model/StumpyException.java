@@ -1,4 +1,4 @@
-package com.stumpy.exception;
+package com.stumpy.exception.model;
 
 import com.stumpy.exception.base.BaseException;
 

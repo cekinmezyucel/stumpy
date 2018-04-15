@@ -1,4 +1,4 @@
-package com.stumpy.exception;
+package com.stumpy.exception.base;
 
 import static com.stumpy.exception.util.ExceptionUtil.convertException;
 
@@ -11,8 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import com.stumpy.exception.base.BaseException;
 import com.stumpy.exception.model.ExceptionRestResult;
+import com.stumpy.exception.model.StumpyException;
 
 public abstract class BaseExceptionHandler {
 
