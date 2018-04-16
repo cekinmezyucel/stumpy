@@ -1,0 +1,16 @@
+== Statistic Services
+=== How to call Statistic Count Service?
+This is a GET service. 
+
+[options="header"]
+|===
+|statisticTypeName|value
+|Hit Count|HIT_COUNT
+|===
+
+[[app-listing]]
+[source,ruby]
+.Sample Url
+----
+http://localhost:8081/statistic/count/{statisticTypeName}/{shortUrl}
+----

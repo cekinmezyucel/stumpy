@@ -10,5 +10,7 @@
 include::overview.adoc[]
 include::brief.adoc[]
 include::shortenerService.adoc[]
+include::redirectService.adoc[]
+include::statisticService.adoc[]
 include::paths.adoc[]
 include::definitions.adoc[]

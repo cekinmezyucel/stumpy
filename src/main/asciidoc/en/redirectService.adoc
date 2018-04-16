@@ -1,0 +1,10 @@
+== Redirect Services
+=== How to call Redirect Service?
+Just copy the short url to your browser.
+
+[[app-listing]]
+[source,ruby]
+.Sample Url
+----
+http://localhost:8081/MQ
+----
