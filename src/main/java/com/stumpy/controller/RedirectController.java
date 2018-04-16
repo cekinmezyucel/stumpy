@@ -21,10 +21,11 @@ public class RedirectController {
   private RedirectService redirectService;
 
   /**
-   * Redirect Service.
+   * Redirects short URL to LongURL.
    * 
    * <p>
    * Main redirect method. Retrieve shortUrl and redirect with TEMPORARY_REDIRECT(307).
+   * TEMPORARY_REDIRECT important for statistics. It prevents browser cache redirects.
    * </p>
    * 
    * @param shortUrl.

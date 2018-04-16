@@ -28,8 +28,8 @@ public class RedirectServiceTest {
   @Test
   public void testWhenShortUrlNonNull() {
     Mockito.when(urlModelRepository.findEntity(UrlGeneratorUtil.decode("MA")))
-        .thenReturn(new UrlModel(1L, "https://wwww.google.com.tr"));
-    assertEquals("https://wwww.google.com.tr", redirectService.getLongUrl("MA"));
+        .thenReturn(new UrlModel(1L, "https://wwww.google.com"));
+    assertEquals("https://wwww.google.com", redirectService.getLongUrl("MA"));
   }
 
 }

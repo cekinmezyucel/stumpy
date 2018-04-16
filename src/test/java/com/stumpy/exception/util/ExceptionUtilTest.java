@@ -1,6 +1,5 @@
-package com.stumpy.util;
+package com.stumpy.exception.util;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Constructor;
@@ -12,22 +11,12 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UrlGeneratorUtilTest {
-
-  @Test
-  public void encodeShouldHandleOne() {
-    assertEquals("MQ", UrlGeneratorUtil.encode(1L));
-  }
-
-  @Test
-  public void decodeShouldHandleMQ() {
-    assertEquals(Long.valueOf(1L), UrlGeneratorUtil.decode("MQ"));
-  }
+public class ExceptionUtilTest {
 
   @Test
   public void testConstructorIsPrivate()
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-    Constructor<UrlGeneratorUtil> constructor = UrlGeneratorUtil.class.getDeclaredConstructor();
+    Constructor<ExceptionUtil> constructor = ExceptionUtil.class.getDeclaredConstructor();
     assertTrue(Modifier.isPrivate(constructor.getModifiers()));
     constructor.setAccessible(true);
     constructor.newInstance();

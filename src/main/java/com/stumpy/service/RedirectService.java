@@ -18,7 +18,7 @@ public class RedirectService {
   private static final Logger LOG = LoggerFactory.getLogger(RedirectService.class);
 
   @Autowired
-  private UrlModelRepository redisRepository;
+  private UrlModelRepository urlModelRepository;
 
   @Autowired
   private StatisticService statisticService;
@@ -31,7 +31,7 @@ public class RedirectService {
    */
   public String getLongUrl(String shortUrl) {
     Long id = decode(shortUrl);
-    UrlModel urlModel = redisRepository.findEntity(id);
+    UrlModel urlModel = urlModelRepository.findEntity(id);
 
     if (nonNull(urlModel)) {
       LOG.info("Long url found:" + urlModel.toString());
