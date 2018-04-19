@@ -3,11 +3,11 @@ package com.stumpy.service;
 import static com.stumpy.model.type.StatisticType.HIT_COUNT;
 import static com.stumpy.util.UrlGeneratorUtil.decode;
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class StatisticService {
    */
   public Long getStatisticCount(String shortUrl, String statisticTypeName) {
     UrlStatisticCounterModel statisticModel = urlStatisticCounterRepository.findEntity(decode(shortUrl));
-    if (Objects.nonNull(statisticModel)) {
+    if (nonNull(statisticModel)) {
       Optional<Long> count = statisticModel.getStatisticCounter().entrySet().stream()
           .filter(s -> s.getKey().equals(StatisticType.valueOf(statisticTypeName))).map(Entry::getValue).findAny();
       return count.orElse(0L);

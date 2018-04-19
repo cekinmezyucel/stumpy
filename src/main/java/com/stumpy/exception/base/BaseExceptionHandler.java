@@ -64,6 +64,7 @@ public abstract class BaseExceptionHandler {
 
 
   private String getErrorMessages(List<org.springframework.validation.FieldError> fieldErrors) {
+    // TODO : find only exception messages.
     return fieldErrors.stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(","));
   }
 

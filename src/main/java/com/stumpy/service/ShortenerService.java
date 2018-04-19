@@ -2,9 +2,6 @@ package com.stumpy.service;
 
 import static com.stumpy.util.UrlGeneratorUtil.encode;
 
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Map.Entry;
 import java.util.Optional;
 
@@ -13,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.stumpy.exception.model.StumpyException;
 import com.stumpy.model.UrlModel;
 import com.stumpy.repository.IdCounterRepository;
 import com.stumpy.repository.UrlModelRepository;
@@ -37,42 +33,19 @@ public class ShortenerService {
    * @return {@link String}.
    */
   public String getShortUrl(String longUrl) {
-
-    validateLongUrl(longUrl);
-
-    Optional<Entry<Long, UrlModel>> findAny = urlModelRepository.findAllEntities().entrySet().stream()
-        .filter(m -> m.getValue().getLongUrl().equals(longUrl)).findAny();
-
-    return findAny.isPresent() ? encode(findAny.get().getKey()) : addNewLongUrl(longUrl);
+    Optional<Long> id = urlModelRepository.findAllEntities().entrySet().stream()
+        .filter(m -> m.getValue().getLongUrl().equals(longUrl)).map(Entry::getKey).findAny();
+    return encode(id.orElse(addNewLongUrl(longUrl)));
   }
 
-  private String addNewLongUrl(String longUrl) {
+  private Long addNewLongUrl(String longUrl) {
     Long id = idCounterRepository.getAndIncrement();
     urlModelRepository.add(new UrlModel(id, longUrl));
     String shortUrl = encode(id);
     LOG.info("Given url is shortened. Short URL: " + shortUrl + ", Long URL: " + longUrl);
-    return shortUrl;
+    return id;
   }
 
-  private void validateLongUrl(String longUrl) {
-    if (!isValidURL(longUrl)) {
-      throw new StumpyException("STUMPY002", longUrl);
-    }
-  }
 
-  private static boolean isValidURL(String longUrl) {
-    URL url = null;
-    try {
-      url = new URL(longUrl);
-    } catch (MalformedURLException exception) {
-      return false;
-    }
-    try {
-      url.toURI();
-    } catch (URISyntaxException exception) {
-      return false;
-    }
-    return true;
-  }
 
 }

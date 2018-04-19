@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import com.stumpy.model.api.RequestBody;
+import com.stumpy.validation.Url;
 
 @ApiModel(description = SHORTENER_REQUEST)
 public class ShortenerRequest implements RequestBody {
@@ -16,6 +17,7 @@ public class ShortenerRequest implements RequestBody {
   private static final long serialVersionUID = -7673548390118846860L;
 
   @NotNull(message = "{error.validation.notnull.longUrl}")
+  @Url(message = "{error.validation.valid.longUrl}")
   @ApiModelProperty(value = LONG_URL, required = true)
   private String longUrl;
 
