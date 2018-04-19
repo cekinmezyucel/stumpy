@@ -37,9 +37,9 @@ public class StatisticService {
   public Long getStatisticCount(String shortUrl, String statisticTypeName) {
     UrlStatisticCounterModel statisticModel = urlStatisticCounterRepository.findEntity(decode(shortUrl));
     if (Objects.nonNull(statisticModel)) {
-      Optional<Entry<StatisticType, Long>> hitCountMap = statisticModel.getStatisticCounter().entrySet().stream()
-          .filter(s -> s.getKey().equals(StatisticType.valueOf(statisticTypeName))).findAny();
-      return hitCountMap.isPresent() ? hitCountMap.get().getValue() : 0L;
+      Optional<Long> count = statisticModel.getStatisticCounter().entrySet().stream()
+          .filter(s -> s.getKey().equals(StatisticType.valueOf(statisticTypeName))).map(Entry::getValue).findAny();
+      return count.orElse(0L);
     } else {
       return 0L;
     }
