@@ -8,7 +8,6 @@ import static com.stumpy.util.UrlGeneratorUtil.buildFullPath;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -18,6 +17,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -43,8 +43,8 @@ public class ShortenerController {
    * @return {@link ShortenerResponse}.
    */
   @ResponseStatus(OK)
-  @RequestMapping(path = "/generate", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE},
-      produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE}, method = POST)
+  @PostMapping(path = "/generate", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE},
+      produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
   @ApiOperation(nickname = SHORTENER_GENERATE_PATH, produces = STANDART_PROD_CONS, consumes = STANDART_PROD_CONS,
       value = SHORTENER_GENERATE_NAME, notes = SHORTENER_GENERATE_DESCRIPTION, response = ShortenerResponse.class)
   public ShortenerResponse generateShortUrl(@Valid @RequestBody ShortenerRequest shortenerRequest,

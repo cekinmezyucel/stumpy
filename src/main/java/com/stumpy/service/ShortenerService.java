@@ -35,14 +35,13 @@ public class ShortenerService {
   public String getShortUrl(String longUrl) {
     Optional<Long> id = urlModelRepository.findAllEntities().entrySet().stream()
         .filter(m -> m.getValue().getLongUrl().equals(longUrl)).map(Entry::getKey).findAny();
-    return encode(id.orElse(addNewLongUrl(longUrl)));
+    return encode(id.orElseGet(() -> addNewLongUrl(longUrl)));
   }
 
   private Long addNewLongUrl(String longUrl) {
     Long id = idCounterRepository.getAndIncrement();
     urlModelRepository.add(new UrlModel(id, longUrl));
-    String shortUrl = encode(id);
-    LOG.info("Given url is shortened. Short URL: " + shortUrl + ", Long URL: " + longUrl);
+    LOG.info("Given url is shortened. Short URL: " + encode(id) + ", Long URL: " + longUrl);
     return id;
   }
 
